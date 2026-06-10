@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login — DEV PIYAS</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+</head>
+<body>
+  <div class="login-bg">
+    <video autoplay muted loop playsinline class="login-video">
+      <source src="https://cdn.discordapp.com/attachments/1497979406801572030/1513995400535736421/8e06560d-82db-45f6-961a-3c686ea10f53.mp4?ex=6a2a6a58&is=6a2918d8&hm=8d219b3c3fe309d28ae6c8df7ebb1fad85382f48895873300768af3649c19971&" type="video/mp4"/>
+    </video>
+    <div class="login-overlay"></div>
+    <div class="login-card" role="main">
+      <h2 class="login-title">Enter Password</h2>
+      <div class="login-field">
+        <input id="passInput" type="password" placeholder="Password" autocomplete="off" />
+      </div>
+      <button id="loginBtn" class="login-btn">LOGIN</button>
+      <div id="loginMsg" class="login-msg" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <script>
+    const CORRECT = 'PIYAS_69';
+    const input = document.getElementById('passInput');
+    const btn = document.getElementById('loginBtn');
+    const msg = document.getElementById('loginMsg');
+
+    function showMessage(text, ok) {
+      msg.textContent = text;
+      msg.style.color = ok ? '#bbf7d0' : '#fecaca';
+    }
+
+    function tryLogin() {
+      const v = input.value || '';
+      if (v === CORRECT) {
+        showMessage('Login successful — redirecting...', true);
+        setTimeout(() => { window.location.href = 'dashboard.html'; }, 700);
+      } else {
+        showMessage('Incorrect password', false);
+        input.value = '';
+        input.focus();
+      }
+    }
+
+    btn.addEventListener('click', tryLogin);
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') tryLogin(); });
+
+    // focus on load
+    window.addEventListener('load', () => { input.focus(); });
+  </script>
+</body>
+</html>
